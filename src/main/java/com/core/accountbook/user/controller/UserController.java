@@ -10,9 +10,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/user")
+@RestController
+@RequestMapping("/user")
 public class UserController {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -24,10 +26,7 @@ public class UserController {
     }
 
     @PostMapping()
-    public String createUser(@Valid @RequestBody CreateUser createUser) {
-
-        log.debug("컨트롤러 호출");
-
-        return "호출완료";
+    public User createUser(@Valid @RequestBody CreateUser createUser) {
+        return userService.createUser(createUser);
     }
 }
